@@ -25,9 +25,20 @@ function LemurLad () {
     )
     scene.cameraFollowSprite(lemurlad)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+    game.gameOver(true)
+})
 function background () {
     tiles.setCurrentTilemap(tilemap`level`)
     tiles.placeOnTile(lemurlad, tiles.getTileLocation(3, 13))
+}
+function touch () {
+    if (lemurlad.overlapsWith(Monster)) {
+        game.gameOver(false)
+    }
+    if (Monster.overlapsWith(lemurlad)) {
+        game.gameOver(false)
+    }
 }
 function monster () {
     Monster = sprites.create(img`
@@ -47,15 +58,16 @@ function monster () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Player)
+        `, SpriteKind.Enemy)
     animation.runImageAnimation(
     Monster,
-    assets.animation`kaijuMomWalkLeft`,
-    100,
+    assets.animation`skellyAttackFront`,
+    200,
     true
     )
-    tiles.placeOnTile(Monster, tiles.getTileLocation(3, 12))
+    tiles.placeOnTile(Monster, tiles.getTileLocation(50, 7))
     Monster.setVelocity(0, 45)
+    Monster.follow(lemurlad, 50)
 }
 function bigmonster () {
 	
@@ -65,6 +77,7 @@ function functions () {
     LemurLad()
     background()
     monster()
+    touch()
 }
 function extras () {
     pixelstometers = 30
