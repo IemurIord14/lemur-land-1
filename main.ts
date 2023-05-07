@@ -44,7 +44,13 @@ let lemurlad: Sprite = null
 functions()
 game.onUpdate(function () {
     if (lemurlad.isHittingTile(CollisionDirection.Bottom) && controller.A.isPressed()) {
-        lemurlad.setVelocity(0, -20000 * pixelstometers)
+        lemurlad.setVelocity(0, -100000000000000000 * pixelstometers)
+    }
+})
+forever(function () {
+    pause(100)
+    if (!(lemurlad.isHittingTile(CollisionDirection.Bottom))) {
+        lemurlad.setVelocity(0, 45)
     }
 })
 forever(function () {
@@ -67,8 +73,7 @@ forever(function () {
         lemurlad.x += 2
     }
 })
-game.onUpdateInterval(100, function () {
-    if (!(lemurlad.isHittingTile(CollisionDirection.Bottom))) {
-        lemurlad.setVelocity(0, 45)
-    }
+forever(function () {
+    pause(100)
+    lemurlad.setVelocity(0, 45)
 })
