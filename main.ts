@@ -29,17 +29,48 @@ function background () {
     tiles.setCurrentTilemap(tilemap`level`)
     tiles.placeOnTile(lemurlad, tiles.getTileLocation(3, 13))
 }
+function monster () {
+    Monster = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    animation.runImageAnimation(
+    Monster,
+    assets.animation`kaijuMomWalkLeft`,
+    100,
+    true
+    )
+    tiles.placeOnTile(Monster, tiles.getTileLocation(3, 12))
+    Monster.setVelocity(0, 45)
+}
+function bigmonster () {
+	
+}
 function functions () {
     extras()
     LemurLad()
     background()
+    monster()
 }
 function extras () {
     pixelstometers = 30
-    gravity = 9.81 * pixelstometers
 }
-let gravity = 0
 let pixelstometers = 0
+let Monster: Sprite = null
 let lemurlad: Sprite = null
 functions()
 game.onUpdate(function () {
