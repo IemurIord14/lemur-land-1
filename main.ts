@@ -87,7 +87,7 @@ let Monster: Sprite = null
 let lemurlad: Sprite = null
 functions()
 game.onUpdate(function () {
-    if (lemurlad.isHittingTile(CollisionDirection.Bottom) && controller.A.isPressed()) {
+    if (lemurlad.isHittingTile(CollisionDirection.Bottom) && (controller.A.isPressed() || controller.up.isPressed())) {
         lemurlad.setVelocity(0, -100000000000000000 * pixelstometers)
     }
 })
